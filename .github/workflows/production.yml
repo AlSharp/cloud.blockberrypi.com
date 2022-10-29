@@ -60,6 +60,7 @@ jobs:
             docker system prune -f
             docker run --restart always --name cloud -dit -p 1337:1337 \
             -v /home/albert/sqlite/data.db:/opt/app/.tmp/data.db \
+            -v /home/albert/strapi/public/uploads:/opt/app/public/uploads \
             -e JWT_SECRET='$JWT_SECRET' \
             -e ADMIN_JWT_SECRET='$ADMIN_JWT_SECRET' \
             -e APP_KEYS='$APP_KEYS' \
