@@ -11,7 +11,7 @@ RUN yarn config set network-timeout 600000 -g && yarn install
 FROM node:16-alpine AS builder
 WORKDIR /app
 COPY . .
-COPY --from=deps /opt/app/node_modules ./node_modules
+COPY --from=deps /opt/node_modules ./node_modules
 ENV PATH /opt/node_modules/.bin:$PATH
 RUN yarn build
 
