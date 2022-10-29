@@ -30,7 +30,7 @@ jobs:
         #   PORT: ${{ secrets.PROD_PORT }}
         #   BRANCH: master
         with:
-          name: alsharp/cloud.blockberrypi.com/cloud
+          name: alsharp/cloud.blockberrypi.com/strapi-cms
           registry: ghcr.io
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets. GITHUB_TOKEN }}
@@ -52,17 +52,10 @@ jobs:
           port: ${{ secrets.DEPLOY_PORT }}
           username: ${{ secrets.DEPLOY_USER }}
           password: ${{ secrets.DEPLOY_PASS }}
-          envs: GITHUB_USERNAME, GITHUB_TOKEN, JWT_SECRET, ADMIN_JWT_SECRET, APP_KEYS, API_TOKEN_SALT
+          envs: GITHUB_USERNAME, GITHUB_TOKEN, JWT_SECRET, ADMIN_JWT_SECRET, APP_KEYS, API_TOKEN_SALT, DATABASE_PASSWORD
           script: |
             docker login ghcr.io -u $GITHUB_USERNAME -p $GITHUB_TOKEN
-            docker pull ghcr.io/alsharp/cloud.blockberrypi.com/cloud:latest
-            docker stop cloud
+            docker compose pull cms 
+            docker stop strapi-cms
             docker system prune -f
-            docker run --restart always --name cloud -dit -p 1337:1337 \
-            -v /home/albert/sqlite/data.db:/opt/app/.tmp/data.db \
-            -v /home/albert/strapi/public/uploads:/opt/app/public/uploads \
-            -e JWT_SECRET='$JWT_SECRET' \
-            -e ADMIN_JWT_SECRET='$ADMIN_JWT_SECRET' \
-            -e APP_KEYS='$APP_KEYS' \
-            -e API_TOKEN_SALT='$API_TOKEN_SALT' \
-            ghcr.io/alsharp/cloud.blockberrypi.com/cloud:latest
+            docker compose --env-file ./.env up -d

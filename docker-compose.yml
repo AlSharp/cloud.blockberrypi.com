@@ -1,0 +1,33 @@
+version: '3'
+services:
+  database:
+    restart: always
+    image: postgres
+    volumes:
+      - /home/albert/database:/var/lib/postgresql/data
+    environment:
+      - DATABASE_PASSWORD
+    options: >-
+        --health-cmd pg_isready
+        --health-interval 10s
+        --health-timeout 5s
+        --health-retries 5
+    ports:
+      - 5432:5432
+  cms:
+    restart: always
+    image: strapi-cms
+    command: yarn start
+    ports:
+      - 1337:1337
+    volumes:
+      - /home/albert/strapi/public/uploads:/opt/app/public/uploads
+    depends_on:
+      - database
+    environment:
+      - JWT_SECRET
+      - ADMIN_JWT_SECRET
+      - APP_KEYS
+      - API_TOKEN_SALT
+volumes:
+  /home/albert/database:
