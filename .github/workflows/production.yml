@@ -38,6 +38,12 @@ jobs:
           # buildargs: PORT, BRANCH
           tags: latest
 
+      - name: Copy docker-compose.yml
+        uses: canastro/copy-file-action@master
+        with:
+          source: './docker-compose.yml'
+          target: '/tmp/docker-compose.yml'
+           
       - name: Deploy package to a2hosting
         uses: appleboy/ssh-action@master
         env:
@@ -53,8 +59,6 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           password: ${{ secrets.DEPLOY_PASS }}
           envs: GITHUB_USERNAME, GITHUB_TOKEN, JWT_SECRET, ADMIN_JWT_SECRET, APP_KEYS, API_TOKEN_SALT, DATABASE_PASSWORD
-          source: './docker-compose.yml'
-          target: '/tmp'
           script: |
             docker login ghcr.io -u $GITHUB_USERNAME -p $GITHUB_TOKEN
             docker compose pull cms 
