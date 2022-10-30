@@ -58,4 +58,4 @@ jobs:
             docker compose pull cms 
             docker stop strapi-cms
             docker system prune -f
-            docker compose --env-file ./.env up -d
+            docker compose up -d
