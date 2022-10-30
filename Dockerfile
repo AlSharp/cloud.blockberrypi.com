@@ -13,6 +13,7 @@ FROM node:16-alpine AS builder
 WORKDIR /app
 COPY . .
 COPY --from=deps /opt/node_modules ./node_modules
+COPY --from=deps /opt/docker-compose.yml ./
 ENV PATH /opt/node_modules/.bin:$PATH
 RUN yarn build
 

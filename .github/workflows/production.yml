@@ -60,4 +60,4 @@ jobs:
             docker compose pull cms 
             docker stop strapi-cms
             docker system prune -f
-            docker compose up -f /tmp/docker-compose.yml -d
+            docker compose -f /tmp/docker-compose.yml up -d
