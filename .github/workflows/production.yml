@@ -39,11 +39,15 @@ jobs:
           tags: latest
 
       - name: Copy docker-compose.yml
-        uses: canastro/copy-file-action@master
+        uses: appleboy/ssh-action@master
         with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          port: ${{ secrets.DEPLOY_PORT }}
+          username: ${{ secrets.DEPLOY_USER }}
+          password: ${{ secrets.DEPLOY_PASS }}
           source: './docker-compose.yml'
-          target: '/tmp/docker-compose.yml'
-           
+          target: '/tmp'
+
       - name: Deploy package to a2hosting
         uses: appleboy/ssh-action@master
         env:
