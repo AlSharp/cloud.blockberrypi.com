@@ -53,9 +53,11 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           password: ${{ secrets.DEPLOY_PASS }}
           envs: GITHUB_USERNAME, GITHUB_TOKEN, JWT_SECRET, ADMIN_JWT_SECRET, APP_KEYS, API_TOKEN_SALT, DATABASE_PASSWORD
+          source: './docker-compose.yml'
+          target: '/tmp'
           script: |
             docker login ghcr.io -u $GITHUB_USERNAME -p $GITHUB_TOKEN
             docker compose pull cms 
             docker stop strapi-cms
             docker system prune -f
-            docker compose up -d
+            docker compose up -f /tmp/docker-compose.yml -d
