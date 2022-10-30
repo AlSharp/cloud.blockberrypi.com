@@ -38,10 +38,7 @@ jobs:
           # buildargs: PORT, BRANCH
           tags: latest
 
-      - name: test action
-        run: ls ./
-
-      - name: Copy docker-compose.yml
+      - name: Copy docker-compose.yml to a2hosting
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.DEPLOY_HOST }}

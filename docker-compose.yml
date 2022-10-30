@@ -4,20 +4,23 @@ services:
     restart: always
     image: postgres
     volumes:
-      - postgresdata:/var/lib/postgresql/data
+      - ./postgresdata/:/var/lib/postgresql/data
     environment:
-      - DATABASE_PASSWORD
-    options: >-
-        --health-cmd pg_isready
-        --health-interval 10s
-        --health-timeout 5s
-        --health-retries 5
+      - POSTGRES_USERNAME=postgres
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB=strapi
+    healthcheck:
+        test: ['CMD-SHELL', 'pg_isready', '-d', 'strapi']
+        interval: 30s
+        timeout: 60s
+        retries: 5
+        start_period: 80s
     ports:
       - 5432:5432
   cms:
     restart: always
     image: strapi-cms
-    command: yarn start
+    command: ['yarn', 'start']
     ports:
       - 1337:1337
     volumes:
@@ -30,4 +33,4 @@ services:
       - APP_KEYS
       - API_TOKEN_SALT
 volumes:
-  postgresdata:
+  ./postgresdata/:
