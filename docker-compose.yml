@@ -6,9 +6,10 @@ services:
     container_name: postgres
     volumes:
       - postgresdata:/var/lib/postgresql/data
+    env_file:
+      - .env
     environment:
       - POSTGRES_USERNAME=postgres
-      - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=strapi
     healthcheck:
         test: ['CMD-SHELL', 'pg_isready', '-d', 'strapi']
@@ -29,11 +30,7 @@ services:
       - /home/albert/strapi/public/uploads:/opt/app/public/uploads
     depends_on:
       - database
-    environment:
-      - JWT_SECRET
-      - ADMIN_JWT_SECRET
-      - APP_KEYS
-      - API_TOKEN_SALT
-      - POSTGRES_PASSWORD
+    env_file:
+      - .env
 volumes:
   postgresdata:
