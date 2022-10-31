@@ -34,5 +34,6 @@ services:
       - ADMIN_JWT_SECRET
       - APP_KEYS
       - API_TOKEN_SALT
+      - POSTGRES_PASSWORD
 volumes:
   postgresdata:
