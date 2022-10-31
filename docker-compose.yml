@@ -2,13 +2,13 @@ version: '3.8'
 services:
   database:
     restart: always
-    image: postgres
+    image: postgres:11-alpine
     container_name: postgres
     volumes:
       - postgresdata:/var/lib/postgresql/data
     environment:
       - POSTGRES_USERNAME=postgres
-      - POSTGRES_PASSWORD=password
+      - POSTGRES_PASSWORD
       - POSTGRES_DB=strapi
     healthcheck:
         test: ['CMD-SHELL', 'pg_isready', '-d', 'strapi']
@@ -21,7 +21,7 @@ services:
   cms:
     restart: always
     image: ghcr.io/alsharp/cloud.blockberrypi.com/strapi-cms
-    container_name: strapi-csm
+    container_name: strapi-cms
     command: ['yarn', 'start']
     ports:
       - 1337:1337
