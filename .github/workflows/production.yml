@@ -57,7 +57,7 @@ jobs:
           port: ${{ secrets.DEPLOY_PORT }}
           username: ${{ secrets.DEPLOY_USER }}
           password: ${{ secrets.DEPLOY_PASS }}
-          source: './docker-compose.yml,/github/workspace/.env'
+          source: './docker-compose.yml,${GITHUB_WORKSPACE}/.env'
           target: '/tmp'
 
       # - name: Deploy package to a2hosting
