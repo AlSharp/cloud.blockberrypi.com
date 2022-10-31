@@ -19,7 +19,7 @@ services:
       - 5432:5432
   cms:
     restart: always
-    image: strapi-cms
+    image: ghcr.io/alsharp/cloud.blockberrypi.com/strapi-cms
     command: ['yarn', 'start']
     ports:
       - 1337:1337
