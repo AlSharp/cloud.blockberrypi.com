@@ -6,8 +6,9 @@ services:
     container_name: postgres
     volumes:
       - postgresdata:/var/lib/postgresql/data
+      - /tmp/github/workspace:/tmp/github/workspace
     env_file:
-      - .env
+      - /tmp/github/workspace/.env
     environment:
       - POSTGRES_USERNAME=postgres
       - POSTGRES_DB=strapi
@@ -28,9 +29,10 @@ services:
       - 1337:1337
     volumes:
       - /home/albert/strapi/public/uploads:/opt/app/public/uploads
+      - /tmp/github/workspace:/tmp/github/workspace
     depends_on:
       - database
     env_file:
-      - .env
+      - /tmp/github/workspace/.env
 volumes:
   postgresdata:
