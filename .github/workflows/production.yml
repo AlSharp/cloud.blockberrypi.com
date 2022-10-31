@@ -57,7 +57,7 @@ jobs:
           ADMIN_JWT_SECRET: ${{ secrets.ADMIN_JWT_SECRET }}
           APP_KEYS: ${{ secrets.APP_KEYS }}
           API_TOKEN_SALT: ${{ secrets.API_TOKEN_SALT }}
-          DATABASE_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
         with:
           host: ${{ secrets.DEPLOY_HOST }}
           port: ${{ secrets.DEPLOY_PORT }}
