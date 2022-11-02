@@ -25,6 +25,9 @@
         "images",
         "videos"
       ]
+    },
+    "description": {
+      "type": "richtext"
     }
   }
 }
