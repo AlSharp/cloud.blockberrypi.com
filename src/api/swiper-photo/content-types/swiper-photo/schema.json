@@ -4,14 +4,17 @@
   "info": {
     "singularName": "swiper-photo",
     "pluralName": "swiper-photos",
-    "displayName": "Swiper Photo",
-    "description": ""
+    "displayName": "Swiper Photo "
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
+    "order": {
+      "type": "integer",
+      "default": 0
+    },
     "image": {
       "allowedTypes": [
         "images",
@@ -20,12 +23,6 @@
       "type": "media",
       "multiple": false,
       "required": true
-    },
-    "order": {
-      "type": "integer"
-    },
-    "description": {
-      "type": "string"
     }
   }
 }

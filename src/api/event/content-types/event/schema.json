@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "upcoming_events",
+  "collectionName": "events",
   "info": {
-    "singularName": "upcoming-event",
-    "pluralName": "upcoming-events",
-    "displayName": "Upcoming Event"
+    "singularName": "event",
+    "pluralName": "events",
+    "displayName": "Event"
   },
   "options": {
     "draftAndPublish": true
@@ -15,22 +15,22 @@
       "type": "string",
       "required": true
     },
-    "text": {
+    "description": {
       "type": "richtext",
       "required": true
     },
-    "datetime": {
+    "date_time": {
       "type": "datetime",
-      "default": "2023-01-01T05:00:00.000Z"
+      "required": true
     },
     "image": {
       "allowedTypes": [
         "images",
-        "videos",
-        "audios"
+        "videos"
       ],
       "type": "media",
-      "multiple": false
+      "multiple": false,
+      "required": true
     }
   }
 }
